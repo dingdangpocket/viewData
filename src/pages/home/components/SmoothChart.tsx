@@ -29,6 +29,7 @@ export default function SmoothChart(props: Props) {
       },
       tooltip: {
         trigger: 'axis',
+        formatter: '{b} 点击数量 {c}'
       },
       series: [
         {

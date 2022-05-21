@@ -76,15 +76,37 @@ export default function LineChartCompare(props: Props) {
           },
         },
         // legend: 'plain',
+        legend: {
+          show: true,
+        },
         xAxis: {
           type: 'category',
           name: '年份',
+          offset: 5,
+          nameTextStyle: { fontSize: 20 },
+          nameGap: 30,
+          boundaryGap: true,
+          triggerEvent: true,
+          axisTick: {
+            show: true,
+            inside: true,
+            length: 7,
+          },
+          axisLabel: {
+            color: 'red',
+          },
         },
+        //X轴配置;
         yAxis: {
           name: '收入',
+          nameTextStyle: { fontSize: 20 },
+          // min:10000,
+          // max:30000,
         },
         tooltip: {
           trigger: 'axis',
+          //axis轴上;
+          //item数据内部;
           backgroundColor: '#2a293d',
           textStyle: { color: 'white' },
         },
@@ -141,51 +163,6 @@ export default function LineChartCompare(props: Props) {
             type: 'inside',
           },
         ],
-        visualMap: {
-          top: 50,
-          right: 10,
-          textStyle: {
-            color: 'white',
-            fontSize: 30,
-            // textBorderColor: 'rgba(142, 47, 47, 1)',
-            // textBorderWidth: 4,
-          },
-
-          pieces: [
-            {
-              gt: 0,
-              lte: 50,
-              color: '#93CE07',
-            },
-            {
-              gt: 50,
-              lte: 100,
-              color: '#FBDB0F',
-            },
-            {
-              gt: 100,
-              lte: 150,
-              color: '#FC7D02',
-            },
-            {
-              gt: 150,
-              lte: 200,
-              color: '#FD0100',
-            },
-            {
-              gt: 200,
-              lte: 300,
-              color: '#AA069F',
-            },
-            {
-              gt: 300,
-              color: '#AC3B2A',
-            },
-          ],
-          outOfRange: {
-            color: '#999',
-          },
-        },
         series: [
           {
             type: 'line',
@@ -223,8 +200,8 @@ export default function LineChartCompare(props: Props) {
         ],
       };
       chart.setOption(option);
-      chart.on('click', () => {
-        console.log('click');
+      chart.on('click', (e) => {
+        console.log('click', e);
       });
       window.onresize = () => {
         chart.resize();
