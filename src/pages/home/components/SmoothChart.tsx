@@ -38,6 +38,20 @@ export default function SmoothChart(props: Props) {
       textStyle: { color: 'white' },
       backgroundColor: 'black',
       gradientColor: ['red'],
+      grid: {
+        show: true,
+      },
+      dataZoom: [
+        {
+          type: 'slider',
+          xAxisIndex: 0,
+          //inside
+        },
+        {
+          type: 'slider',
+          yAxisIndex: 0,
+        },
+      ],
       xAxis: {
         type: 'category',
         data: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
