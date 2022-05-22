@@ -10,6 +10,7 @@ import {
   VisualMapComponent,
   MarkLineComponent,
   DataZoomComponent,
+  LegendComponent
 } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
@@ -26,6 +27,7 @@ echarts.use([
   UniversalTransition,
   MarkLineComponent,
   DataZoomComponent,
+  LegendComponent
 ]);
 export type Props = {
   data: any[] | undefined;
