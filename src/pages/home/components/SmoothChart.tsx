@@ -1,7 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts/core';
-import { GridComponent, ToolboxComponent } from 'echarts/components';
-import { LineChart ,BarChart} from 'echarts/charts';
+import {
+  GridComponent,
+  ToolboxComponent,
+  MarkPointComponent,
+  MarkLineComponent,
+  MarkAreaComponent,
+} from 'echarts/components';
+import { LineChart, BarChart } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 import Styles from '../home.module.less';
@@ -11,14 +17,18 @@ echarts.use([
   CanvasRenderer,
   UniversalTransition,
   ToolboxComponent,
-  BarChart
+  BarChart,
+  MarkPointComponent,
+  MarkLineComponent,
+  MarkAreaComponent,
 ]);
 export type Props = {
-  data: number[] | undefined;
+  data?: number[] | undefined;
 };
 export default function SmoothChart(props: Props) {
   const chartRef = useRef<HTMLInputElement>(null);
-  const data2=[232,3234,545,67,899,23,100]
+  const data1 = [200, 3234, 545, 67, 899, 600, 380];
+  const data2 = [820, 932, 901, 934, 1290, 1330, 20];
   useEffect(() => {
     const chart = echarts.init(
       chartRef.current as unknown as HTMLCanvasElement,
@@ -31,15 +41,19 @@ export default function SmoothChart(props: Props) {
       xAxis: {
         type: 'category',
         data: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
+        boundaryGap: false,
+        //x轴数据;
       },
-      //xz轴
+      //x轴
       yAxis: {
         type: 'value',
+        // scale:true,
+        //自动从series匹配;
       },
       //y轴
       tooltip: {
         trigger: 'axis',
-        formatter: '{b} 点击数量 {c}',
+        // formatter: '{b} 点击数量 {c}',
         // formatter:(e:any)=>{
         //   return JSON.stringify(e[0].data)
         // }
@@ -59,23 +73,70 @@ export default function SmoothChart(props: Props) {
       //通用工具
       series: [
         {
-          name:"成都",
-          data: props.data,
+          name: '成都',
           type: 'line',
+          data: data1,
+          // stack: 'key',
+          //堆叠数据;
           smooth: true,
+          lineStyle: {
+            color: 'red',
+          },
+          // areaStyle: {
+          //   color: 'red',
+          // },
+          markPoint: {
+            data: [
+              {
+                type: 'max',
+              },
+              {
+                type: 'min',
+              },
+            ],
+          },
+          markLine: {
+            data: [
+              {
+                type: 'average',
+              },
+            ],
+          },
+          markArea: {
+            data: [[{ xAxis: '周一' }, { xAxis: '周三' }]],
+          },
         },
         {
-          name:'北京',
-          data: data2,
+          name: '北京',
           type: 'line',
+          data: data2,
+          // stack: 'key',
+          //堆叠数据;
           smooth: true,
+          markPoint: {
+            data: [
+              {
+                type: 'max',
+              },
+              {
+                type: 'min',
+              },
+            ],
+          },
+          markLine: {
+            data: [
+              {
+                type: 'average',
+              },
+            ],
+          },
         },
       ],
       //值
-      legend:{
-        data:["成都","北京"]
+      legend: {
+        data: ['成都', '北京'],
         //匹配series中的name进行展示筛选;
-      }
+      },
       //筛选值
     };
     chart.setOption(option);

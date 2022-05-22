@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import axios from 'axios';
 import LineChartCompare from './components/LineChartCompare';
 import SmoothChart from './components/SmoothChart';
+import ScatterDiagram from './components/ScatterDiagram';
 export type Item = {};
 export default function home(props: any) {
   const [data, setData] = useState<any[]>([]);
@@ -28,7 +29,8 @@ export default function home(props: any) {
   return (
     <>
       <LineChartCompare data={computedRes}></LineChartCompare>
-      <SmoothChart data={[820, 932, 901, 934, 1290, 1330, 20]}></SmoothChart>
+      <SmoothChart></SmoothChart>
+      <ScatterDiagram></ScatterDiagram>
     </>
   );
 }
