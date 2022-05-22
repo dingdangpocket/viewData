@@ -3,6 +3,7 @@ import axios from 'axios';
 import LineChartCompare from './components/LineChartCompare';
 import SmoothChart from './components/SmoothChart';
 import ScatterDiagram from './components/ScatterDiagram';
+import PieGraph from './components/PieGraph';
 export type Item = {};
 export default function home(props: any) {
   const [data, setData] = useState<any[]>([]);
@@ -31,6 +32,7 @@ export default function home(props: any) {
       <LineChartCompare data={computedRes}></LineChartCompare>
       <SmoothChart></SmoothChart>
       <ScatterDiagram></ScatterDiagram>
+      <PieGraph></PieGraph>
     </>
   );
 }

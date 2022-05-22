@@ -33,6 +33,8 @@ export default function SmoothChart(props: Props) {
     const chart = echarts.init(
       chartRef.current as unknown as HTMLCanvasElement,
     );
+    // echarts 全局对象
+    // chart 当前实例
     console.log('chart', chart);
     let option = {
       textStyle: { color: 'white' },
