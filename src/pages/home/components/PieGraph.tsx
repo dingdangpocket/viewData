@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Styles from '../home.module.less';
 import * as echarts from 'echarts/core';
 import {
@@ -21,12 +21,14 @@ echarts.use([
 
 export default function PieGraph() {
   const chartRef = useRef<HTMLInputElement>(null);
+  const [charts, setCharts] = useState<any>();
   const data1 = [200, 3234, 545, 67, 899, 600, 380];
   const data2 = [820, 932, 901, 934, 1290, 1330, 20];
   useEffect(() => {
     const chart = echarts.init(
       chartRef.current as unknown as HTMLCanvasElement,
     );
+    setCharts(chart);
     console.log('chart', chart);
     let option = {
       title: {
@@ -43,6 +45,7 @@ export default function PieGraph() {
       legend: {
         orient: 'vertical',
         left: 'left',
+        data: ['天猫', '京东'],
       },
       series: [
         {
@@ -72,13 +75,33 @@ export default function PieGraph() {
       ],
     };
     chart.setOption(option);
+    chart.on('legendselectchanged', (e) => {
+      console.log('图例更改', e);
+    });
+    chart.off('click');
     window.onresize = () => {
       chart.resize();
     };
   });
+  const dispatch = () => {
+    charts.dispatchAction({
+      type: 'highlight',
+      seriesIndex: 0,
+      dataIndex:0,
+    });
+    charts.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex:0,
+      });
+  };
+  //自定义事件;
   return (
-    <div ref={chartRef} className={Styles.main}>
-      SmoothChart
-    </div>
+    <>
+      <div onClick={() => dispatch()}>dispatch事件</div>
+      <div ref={chartRef} className={Styles.main}>
+        SmoothChart
+      </div>
+    </>
   );
 }

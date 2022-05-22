@@ -4,6 +4,7 @@ import LineChartCompare from './components/LineChartCompare';
 import SmoothChart from './components/SmoothChart';
 import ScatterDiagram from './components/ScatterDiagram';
 import PieGraph from './components/PieGraph';
+import ChinaMap from './components/ChinaMap';
 export type Item = {};
 export default function home(props: any) {
   const [data, setData] = useState<any[]>([]);
@@ -39,6 +40,7 @@ export default function home(props: any) {
       <SmoothChart></SmoothChart>
       <ScatterDiagram></ScatterDiagram>
       <PieGraph></PieGraph>
+      <ChinaMap></ChinaMap>
     </>
   );
 }
