@@ -20,9 +20,15 @@ export default function home(props: any) {
       setData([...res.data]);
     })();
   }, []);
-
+  const sleep = (delay: number) => {
+    let start = new Date().getTime();
+    while (new Date().getTime() - start < delay) {
+      continue;
+    }
+  };
   const computedRes = useMemo(() => {
     if (data.length === 0) return;
+    sleep(100);
     data[0] = ['收入', '预期寿命', '人口', '国家', '年份'];
     return data;
   }, [data]);

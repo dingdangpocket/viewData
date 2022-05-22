@@ -10,7 +10,7 @@ import {
   VisualMapComponent,
   MarkLineComponent,
   DataZoomComponent,
-  LegendComponent
+  LegendComponent,
 } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
@@ -27,18 +27,21 @@ echarts.use([
   UniversalTransition,
   MarkLineComponent,
   DataZoomComponent,
-  LegendComponent
+  LegendComponent,
 ]);
 export type Props = {
   data: any[] | undefined;
 };
 export default function LineChartCompare(props: Props) {
   const chartRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
-    if (props.data) {
-      const chart = echarts.init(
-        chartRef.current as unknown as HTMLCanvasElement,
-      );
+    const chart = echarts.init(
+      chartRef.current as unknown as HTMLCanvasElement,
+    );
+    // chart.showLoading();
+    if (props.data != undefined) {
+      // chart.hideLoading();
       console.log('chart', chart);
       let option = {
         textStyle: { color: 'white' },

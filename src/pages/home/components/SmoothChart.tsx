@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts/core';
 import {
   GridComponent,
@@ -26,7 +26,8 @@ export type Props = {
   data?: number[] | undefined;
 };
 export default function SmoothChart(props: Props) {
-  
+  const [charts, setCharts] = useState<any>();
+
   const chartRef = useRef<HTMLInputElement>(null);
   const data1 = [200, 3234, 545, 67, 899, 600, 380];
   const data2 = [820, 932, 901, 934, 1290, 1330, 20];
@@ -35,6 +36,7 @@ export default function SmoothChart(props: Props) {
     const chart = echarts.init(
       chartRef.current as unknown as HTMLCanvasElement,
     );
+    setCharts(chart);
     // echarts 全局对象
     // chart 当前实例
     console.log('chart', chart);
@@ -162,9 +164,25 @@ export default function SmoothChart(props: Props) {
       chart.resize();
     };
   });
+  const update = () => {
+    const data3 = [10, 32, 1, 4, 290, 10, 20];
+    let option = {
+      series: [
+        {
+          name: '成都',
+          type: 'line',
+          data: data3,
+        },
+      ],
+    };
+    charts.setOption(option);
+  };
   return (
-    <div ref={chartRef} className={Styles.main}>
-      SmoothChart
-    </div>
+    <>
+      <div ref={chartRef} className={Styles.main}>
+        SmoothChart
+      </div>
+      <button onClick={() => update()}>增量更新</button>
+    </>
   );
 }
