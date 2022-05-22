@@ -93,7 +93,7 @@ export default function SmoothChart(props: Props) {
         {
           name: '成都',
           type: 'line',
-          data: data1,
+          data: data1,//数据
           // stack: 'key',
           //堆叠数据;
           smooth: true,
