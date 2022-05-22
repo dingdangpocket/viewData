@@ -26,9 +26,11 @@ export type Props = {
   data?: number[] | undefined;
 };
 export default function SmoothChart(props: Props) {
+  
   const chartRef = useRef<HTMLInputElement>(null);
   const data1 = [200, 3234, 545, 67, 899, 600, 380];
   const data2 = [820, 932, 901, 934, 1290, 1330, 20];
+
   useEffect(() => {
     const chart = echarts.init(
       chartRef.current as unknown as HTMLCanvasElement,
